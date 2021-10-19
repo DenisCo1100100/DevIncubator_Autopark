@@ -2,41 +2,29 @@
 
 namespace DevIncubator_Autopark
 {
-	class VehicleType
+	public class VehicleType
 	{
-		private string _typeName;
-		private float _taxCoefficient;
-
 		public VehicleType()
 		{
-			_typeName = "Vehicle";
-			_taxCoefficient = 1f;
+			TypeName = "Vehicle";
+			TaxCoefficient = 1f;
 		}
 
 		public VehicleType(string typeName, float taxCoefficient = 1f)
 		{
-			_typeName = typeName;
-			_taxCoefficient = taxCoefficient;
+			TypeName = typeName;
+			TaxCoefficient = taxCoefficient;
 		}
 
-		public string TypeName 
-		{
-			get => _typeName;
-			set => _typeName = value;
-		}
-
-		public float TaxCoefficient 
-		{
-			get => _taxCoefficient;
-			set => _taxCoefficient = value;
-		}
+		public string TypeName { get; set; }
+		public float TaxCoefficient { get; set; }
 
 		public void Display()
 		{
-			Console.WriteLine($"TypeName = {_typeName}");
-			Console.WriteLine($"TaxCoefficient = {_taxCoefficient}");
+			Console.WriteLine($"TypeName = {TypeName}");
+			Console.WriteLine($"TaxCoefficient = {TaxCoefficient}");
 		}
 
-		public override string ToString() => $"{_typeName}, \"{_taxCoefficient}\"";
+		public override string ToString() => $"{TypeName}, \"{TaxCoefficient}\"";
 	}
 }

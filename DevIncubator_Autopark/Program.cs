@@ -2,11 +2,10 @@
 
 namespace DevIncubator_Autopark
 {
-	class Program
+	public class Program
 	{
 		static void Main()
 		{
-			//1
 			VehicleType[] vehicles = new VehicleType[]
 			{
 				new VehicleType("Bus", 1.2f),
@@ -15,33 +14,42 @@ namespace DevIncubator_Autopark
 				new VehicleType("Tractor", 1.2f)
 			};
 
-			//2, 5, 6
-			float averageCoefficient = 0;
 			for (int i = 0; i < vehicles.Length; i++)
 			{
 				vehicles[i].Display();
+			}
 
+			Console.WriteLine($"Average tax coefficient = {ColculateAverageCoefficient(vehicles):0.00}");
+
+			vehicles[^1].TaxCoefficient = 1.3f;
+
+			Console.WriteLine($"Maximum coefficient = {ColculateMaxCoefficient(vehicles)}");
+
+			foreach (var vehicle in vehicles)
+				Console.WriteLine(vehicle);
+		}
+
+		private static float ColculateAverageCoefficient(VehicleType[] vehicles)
+		{
+			float averageCoefficient = 0;
+			for (int i = 0; i < vehicles.Length; i++)
+			{
 				averageCoefficient += vehicles[i].TaxCoefficient;
 			}
 
-			averageCoefficient /= vehicles.Length;
-			Console.WriteLine($"Average tax coefficient = {averageCoefficient:0.00}");
+			return averageCoefficient / vehicles.Length;
+		}
 
-			//3
-			vehicles[^1].TaxCoefficient = 1.3f;
-
-			//4
+		private static float ColculateMaxCoefficient(VehicleType[] vehicles)
+		{
 			float maxCoefficient = 0;
 			for (int i = 0; i < vehicles.Length; i++)
 			{
 				if (vehicles[i].TaxCoefficient > maxCoefficient)
 					maxCoefficient = vehicles[i].TaxCoefficient;
 			}
-			Console.WriteLine($"Maximum coefficient = {maxCoefficient}");
 
-			//7
-			foreach (var vehicle in vehicles)
-				Console.WriteLine(vehicle);
+			return maxCoefficient;
 		}
 	}
 }
