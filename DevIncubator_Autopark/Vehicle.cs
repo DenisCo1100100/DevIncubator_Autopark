@@ -9,7 +9,7 @@ namespace DevIncubator_Autopark
 		private const float TaxCoefficient = 30f;
 
 		public VehicleType VehicleType { get; set; }
-		public string Model { get; }
+		public string Model { get; set; }
 		public string LicensePlate { get; set; }
 		public float Weight { get; set; }
 		public int YearIssue { get; set; }
@@ -18,7 +18,9 @@ namespace DevIncubator_Autopark
 		public float TankCapacity { get; set; }
 
 		public Vehicle() { }
-		public Vehicle(VehicleType vehicleType, string model, string licensePlate, float weight, int yearIssue, float mileage, ColorType color, float tankCapacity)
+		public Vehicle(VehicleType vehicleType, string model, string licensePlate, 
+			float weight, int yearIssue, float mileage, 
+			ColorType color, float tankCapacity)
 		{
 			VehicleType = vehicleType;
 			Model = model;
@@ -43,6 +45,7 @@ namespace DevIncubator_Autopark
 
 		public double GetCalcTaxPerMonth() => (Weight * WeightCoefficient) + (VehicleType.TaxCoefficient * TaxCoefficient) + TaxChange;
 
-		public override string ToString() => $"{VehicleType}, {Model}, {LicensePlate}, {Weight}, {YearIssue}, {Mileage}, {Color}, {TankCapacity}, {GetCalcTaxPerMonth():0.00}";
+		public override string ToString() => $"{VehicleType}, {Model}, {LicensePlate}, {Weight}, {YearIssue}, " +
+			$"{Mileage}, {Color}, {TankCapacity}, {GetCalcTaxPerMonth():0.00}";
 	}
 }
