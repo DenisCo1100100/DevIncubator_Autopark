@@ -1,6 +1,6 @@
 ﻿namespace DevIncubator_Autopark
 {
-	public enum Color
+	public enum ColorType
 	{
 		Red,
 		Blue,
