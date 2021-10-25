@@ -8,14 +8,14 @@ namespace DevIncubator_Autopark
 		private const float TaxChange = 5f;
 		private const float TaxCoefficient = 30f;
 
-		public VehicleType VehicleType { get; set; }
-		public string Model { get; set; }
-		public string LicensePlate { get; set; }
-		public float Weight { get; set; }
-		public int YearIssue { get; set; }
-		public float Mileage { get; set; }
-		public ColorType Color { get; set; }
-		public float TankCapacity { get; set; }
+		public VehicleType VehicleType { get; }
+		public string Model { get; }
+		public string LicensePlate { get; }
+		public float Weight { get; }
+		public int YearIssue { get; }
+		public float Mileage { get; }
+		public ColorType Color { get; }
+		public float TankCapacity { get; }
 
 		public Vehicle() { }
 		public Vehicle(VehicleType vehicleType, string model, string licensePlate, 
