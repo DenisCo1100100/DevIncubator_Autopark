@@ -4,10 +4,10 @@ namespace DevIncubator_Autopark.Engines
 {
 	public class ElectricalEngine : Engine
 	{
-		public float ElectricityConsumption { get; }
+		public double ElectricityConsumption { get; }
 
-		public ElectricalEngine(float electricityConsumption)
-			: base("Electrical", 0.1f)
+		public ElectricalEngine(double electricityConsumption)
+			: base("Electrical", 0.1d)
 		{
 			ElectricityConsumption = electricityConsumption;
 		}

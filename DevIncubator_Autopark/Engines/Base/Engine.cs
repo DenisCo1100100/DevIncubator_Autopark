@@ -3,9 +3,9 @@
 	public class Engine
 	{
 		public string TypeName { get; }
-		public float TaxCoefficient { get; }
+		public double TaxCoefficient { get; }
 
-		public Engine(string typeName, float taxCoefficient)
+		public Engine(string typeName, double taxCoefficient)
 		{
 			TypeName = typeName;
 			TaxCoefficient = taxCoefficient;
