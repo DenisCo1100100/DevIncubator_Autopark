@@ -2,7 +2,7 @@
 
 namespace DevIncubator_Autopark.Engines
 {
-	public class ElectricalEngine : Engine
+	public class ElectricalEngine : AbstractEngine
 	{
 		public double ElectricityConsumption { get; }
 
@@ -12,6 +12,6 @@ namespace DevIncubator_Autopark.Engines
 			ElectricityConsumption = electricityConsumption;
 		}
 
-		public double GetMaxKilometers(double batterySize) => batterySize / ElectricityConsumption;
+		public override double GetMaxKilometers(double batterySize) => batterySize / ElectricityConsumption;
 	}
 }

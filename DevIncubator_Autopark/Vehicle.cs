@@ -10,7 +10,7 @@ namespace DevIncubator_Autopark
 		private const float TaxCoefficient = 30f;
 
 		public VehicleType VehicleType { get; }
-		public Engine VehicleEngine { get; }
+		public AbstractEngine VehicleEngine { get; }
 		public string Model { get; }
 		public string LicensePlate { get; }
 		public float Weight { get; }
@@ -20,7 +20,7 @@ namespace DevIncubator_Autopark
 		public float TankCapacity { get; }
 
 		public Vehicle() { }
-		public Vehicle(VehicleType vehicleType, Engine vehicleEngine, string model, 
+		public Vehicle(VehicleType vehicleType, AbstractEngine vehicleEngine, string model, 
 			string licensePlate, float weight, int yearIssue, 
 			float mileage, ColorType color, float tankCapacity)
 		{
