@@ -5,24 +5,24 @@ namespace DevIncubator_Autopark
 {
 	public class Vehicle : IComparable<Vehicle>
 	{
-		private const float WeightCoefficient = 0.0013f;
-		private const float TaxChange = 5f;
-		private const float TaxCoefficient = 30f;
+		private const double WeightCoefficient = 0.0013d;
+		private const double TaxChange = 5d;
+		private const double TaxCoefficient = 30d;
 
 		public VehicleType VehicleType { get; }
 		public AbstractEngine VehicleEngine { get; }
 		public string Model { get; }
 		public string LicensePlate { get; }
-		public float Weight { get; }
+		public double Weight { get; }
 		public int YearIssue { get; }
-		public float Mileage { get; }
+		public double Mileage { get; }
 		public ColorType Color { get; }
-		public float TankCapacity { get; }
+		public double TankCapacity { get; }
 
 		public Vehicle() { }
 		public Vehicle(VehicleType vehicleType, AbstractEngine vehicleEngine, string model, 
-			string licensePlate, float weight, int yearIssue, 
-			float mileage, ColorType color, float tankCapacity)
+			string licensePlate, double weight, int yearIssue, 
+			double mileage, ColorType color, double tankCapacity)
 		{
 			VehicleType = vehicleType;
 			VehicleEngine = vehicleEngine;
