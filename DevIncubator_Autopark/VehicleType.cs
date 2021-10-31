@@ -7,17 +7,17 @@ namespace DevIncubator_Autopark
 		public VehicleType()
 		{
 			TypeName = "Vehicle";
-			TaxCoefficient = 1f;
+			TaxCoefficient = 1d;
 		}
 
-		public VehicleType(string typeName, float taxCoefficient = 1f)
+		public VehicleType(string typeName, double taxCoefficient = 1d)
 		{
 			TypeName = typeName;
 			TaxCoefficient = taxCoefficient;
 		}
 
 		public string TypeName { get; set; }
-		public float TaxCoefficient { get; set; }
+		public double TaxCoefficient { get; set; }
 
 		public void Display()
 		{

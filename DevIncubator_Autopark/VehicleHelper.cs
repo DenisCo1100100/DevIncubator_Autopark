@@ -29,5 +29,25 @@ namespace DevIncubator_Autopark
 
 			return minMilageVehicle;
 		}
+
+		public static Vehicle GetVehicleMaxKilometrs(IReadOnlyList<Vehicle> vehicles)
+		{
+			var maxKilometrsVehicle = vehicles[0];
+			double maxKilometrs = 0.0d;
+
+			foreach (var vehicle in vehicles)
+			{
+				var fuelTank = vehicle.TankCapacity;
+				var vehicleMaxKilometrs = vehicle.VehicleEngine.GetMaxKilometers(fuelTank);
+
+				if (vehicleMaxKilometrs > maxKilometrs)
+				{
+					maxKilometrsVehicle = vehicle;
+					maxKilometrs = vehicleMaxKilometrs;
+				}
+			}
+
+			return maxKilometrsVehicle;
+		}
 	}
 }
