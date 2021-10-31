@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevIncubator_Autopark.Engines.Base;
+using System;
 
 namespace DevIncubator_Autopark
 {
@@ -9,6 +10,7 @@ namespace DevIncubator_Autopark
 		private const float TaxCoefficient = 30f;
 
 		public VehicleType VehicleType { get; }
+		public Engine VehicleEngine { get; }
 		public string Model { get; }
 		public string LicensePlate { get; }
 		public float Weight { get; }
@@ -18,11 +20,12 @@ namespace DevIncubator_Autopark
 		public float TankCapacity { get; }
 
 		public Vehicle() { }
-		public Vehicle(VehicleType vehicleType, string model, string licensePlate, 
-			float weight, int yearIssue, float mileage, 
-			ColorType color, float tankCapacity)
+		public Vehicle(VehicleType vehicleType, Engine vehicleEngine, string model, 
+			string licensePlate, float weight, int yearIssue, 
+			float mileage, ColorType color, float tankCapacity)
 		{
 			VehicleType = vehicleType;
+			VehicleEngine = vehicleEngine;
 			Model = model;
 			LicensePlate = licensePlate;
 			Weight = weight;
@@ -43,9 +46,14 @@ namespace DevIncubator_Autopark
 			return thisTaxCoefficient.CompareTo(otherTaxCoefficient);
 		}
 
-		public double GetCalcTaxPerMonth() => (Weight * WeightCoefficient) + (VehicleType.TaxCoefficient * TaxCoefficient) + TaxChange;
+		public double GetCalcTaxPerMonth() => (Weight * WeightCoefficient) + (VehicleType.TaxCoefficient * VehicleEngine.TaxCoefficient * TaxCoefficient) + TaxChange;
 
-		public override string ToString() => $"{VehicleType}, {Model}, {LicensePlate}, {Weight}, {YearIssue}, " +
+		public override string ToString() => $"{VehicleType}, {VehicleEngine.TypeName}, {Model}, {LicensePlate}, {Weight}, {YearIssue}, " +
 			$"{Mileage}, {Color}, {TankCapacity}, {GetCalcTaxPerMonth():0.00}";
+
+		public override bool Equals(object obj)
+		{
+			return obj is Vehicle otherVehicle && VehicleType == otherVehicle.VehicleType && Model == otherVehicle.Model;
+		}
 	}
 }
