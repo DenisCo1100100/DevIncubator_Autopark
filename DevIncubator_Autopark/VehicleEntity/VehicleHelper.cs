@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DevIncubator_Autopark
+namespace DevIncubator_Autopark.VehicleEntity
 {
 	public static class VehicleHelper
 	{

@@ -1,16 +1,18 @@
 ﻿using System;
 
-namespace DevIncubator_Autopark
+namespace DevIncubator_Autopark.Types
 {
 	public class VehicleType
 	{
+		public int Id { get; }
+
 		public VehicleType()
 		{
 			TypeName = "Vehicle";
 			TaxCoefficient = 1d;
 		}
 
-		public VehicleType(string typeName, double taxCoefficient = 1d)
+		public VehicleType(int id, string typeName, double taxCoefficient = 1d)
 		{
 			TypeName = typeName;
 			TaxCoefficient = taxCoefficient;
