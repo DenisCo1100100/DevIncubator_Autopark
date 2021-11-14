@@ -11,27 +11,25 @@ namespace DevIncubator_Autopark.Files
 			Path = path;
 		}
 
-
-		public List<List<string>> ReadCsvFile()
+		public IEnumerable<List<string>> ReadCsvFile()
 		{
-			var listCsvString = new List<List<string>>();
+            StreamReader reader = new StreamReader(Path);
 
-			using (StreamReader reader = new StreamReader(Path))
-			{
-				while (!reader.EndOfStream)
-				{
-					listCsvString.Add(ParseCsvFile(reader.ReadLine()));
-				}
-			}
-
-			return listCsvString;
-		}
+            while (!reader.EndOfStream)
+            {
+                yield return ParseCsvFile(reader.ReadLine());
+            }
+        }
 
 		public static List<string> ParseCsvFile(string data)
 		{
 			var listParse = new List<string>();
+			var symb = new char[]
+			{
+				'\"', ','
+			};
 
-			foreach (var item in data.Split(','))
+			foreach (var item in data.Split(symb))
 			{
 				listParse.Add(item);
 			}

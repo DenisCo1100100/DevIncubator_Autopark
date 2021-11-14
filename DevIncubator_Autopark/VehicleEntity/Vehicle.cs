@@ -25,11 +25,12 @@ namespace DevIncubator_Autopark.VehicleEntity
 		public List<Rent> Rents { get; }
 
 		public Vehicle() { }
-		public Vehicle(VehicleType vehicleType, AbstractEngine vehicleEngine, string model, 
+		public Vehicle(int id, VehicleType vehicleType, AbstractEngine vehicleEngine, string model, 
 			string licensePlate, double weight, int yearIssue, 
 			double mileage, ColorType color, double tankCapacity)
 		{
-			VehicleType = vehicleType;
+            Id = id;
+            VehicleType = vehicleType;
 			VehicleEngine = vehicleEngine;
 			Model = model;
 			LicensePlate = licensePlate;
@@ -53,7 +54,7 @@ namespace DevIncubator_Autopark.VehicleEntity
 
 		public int Compare([AllowNull] Vehicle x, [AllowNull] Vehicle y) => x.Model.CompareTo(y.Model);
 
-		private double GetTotalIncome()
+		public double GetTotalIncome()
 		{
 			double totalIncome = 0.0d;
 
@@ -70,9 +71,6 @@ namespace DevIncubator_Autopark.VehicleEntity
 		public override string ToString() => $"{VehicleType}, {VehicleEngine.TypeName}, {Model}, {LicensePlate}, {Weight}, {YearIssue}, " +
 			$"{Mileage}, {Color}, {TankCapacity}, {GetCalcTaxPerMonth():0.00}";
 
-		public override bool Equals(object obj)
-		{
-			return obj is Vehicle otherVehicle && VehicleType == otherVehicle.VehicleType && Model == otherVehicle.Model;
-		}
+		public override bool Equals(object obj) => obj is Vehicle otherVehicle && VehicleType == otherVehicle.VehicleType && Model == otherVehicle.Model;
 	}
 }
