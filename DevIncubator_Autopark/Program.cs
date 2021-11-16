@@ -1,6 +1,7 @@
 ﻿using DevIncubator_Autopark.Engines;
 using DevIncubator_Autopark.Types;
 using DevIncubator_Autopark.VehicleEntity;
+using DevIncubator_Autopark.AllCollections;
 using System;
 using System.IO;
 
@@ -13,18 +14,23 @@ namespace DevIncubator_Autopark
 		static void Main()
 		{
 			var vehicleCollections = new Collections($"{DirectoryPath}vehicles.csv", $"{DirectoryPath}types.csv", $"{DirectoryPath}rents.csv");
-			vehicleCollections.Print();
 
-			var vehicle = new Vehicle(1, vehicleCollections.VehicleTypes[1], new DieselEngine(3.2d, 50d), "Dodge Chalenger", "3422 AV-4", 3000d, 2018, 30000, ColorType.Black, 70d);
+			var vehicles = vehicleCollections.Vehicles;
+			var queueVehicles = new MyQueue<Vehicle>();
 
-			vehicleCollections.InsertVehicle(-1, vehicle);
+            for (int i = 0; i < vehicles.Count; i++)
+            {
+				queueVehicles.Enqueue(vehicles[i]);
+                Console.WriteLine($"{vehicles[i].Model} -> vehicle queued up");
+            }
 
-			vehicleCollections.Delete(1);
-			vehicleCollections.Delete(1);
+            Console.WriteLine("\nTransport is washed...\n");
 
-			vehicleCollections.Print();
-			vehicleCollections.Sort(new VehicleComparer());
-			vehicleCollections.Print();
+			int count = queueVehicles.Count;
+			for (int i = 0; i < count; i++)
+			{
+				Console.WriteLine($"{queueVehicles.Dequeue().Model} -> washed");
+			}
 		}
 	}
 }
