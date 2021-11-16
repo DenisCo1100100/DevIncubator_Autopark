@@ -62,8 +62,8 @@ namespace DevIncubator_Autopark
 			AbstractEngine engine = csvString[8] switch
 			{
 				"Electrical" => new ElectricalEngine(double.Parse(csvString[10])),
-				"Gasoline" => new GasolineEngine(double.Parse(csvString[9]), int.Parse(csvString[10])),
-				"Diesel" => new DieselEngine(double.Parse(csvString[9]), int.Parse(csvString[10])),
+				"Gasoline" => new GasolineEngine(double.Parse(csvString[9]), double.Parse(csvString[10])),
+				"Diesel" => new DieselEngine(double.Parse(csvString[9]), double.Parse(csvString[10])),
 				_ => null
 			};
 
@@ -76,8 +76,10 @@ namespace DevIncubator_Autopark
 		private VehicleType GetVehicleType(string idType)
 		{
 			foreach (var vehicleType in VehicleTypes)
+			{
 				if (vehicleType.Id.Equals(int.Parse(idType)))
 					return vehicleType;
+			}
 
 			return new VehicleType();
 		}
@@ -109,10 +111,10 @@ namespace DevIncubator_Autopark
 
 		public void InsertVehicle(int index, Vehicle v)
 		{
-            if (index < 0 || Vehicles.Count < index)
+            if (index < 0 || index > Vehicles.Count - 1)
 				Vehicles.Add(v);
-
-			Vehicles.Insert(index, v);
+            else
+				Vehicles.Insert(index, v);
 		}
 
 		public bool Delete(int index)
@@ -158,9 +160,6 @@ namespace DevIncubator_Autopark
 			Console.WriteLine($"Total: {SumTotalProfit(),120:0.00}");
 		}
 
-		public void Sort(IComparer<Vehicle> comparator)
-		{
-			Vehicles.Sort(comparator);
-		}
+		public void Sort(IComparer<Vehicle> comparator) => Vehicles.Sort(comparator);
 	}
 }

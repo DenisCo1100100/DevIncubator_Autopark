@@ -22,7 +22,7 @@ namespace DevIncubator_Autopark.VehicleEntity
 		public double Mileage { get; }
 		public ColorType Color { get; }
 		public double TankCapacity { get; }
-		public List<Rent> Rents { get; }
+		public List<Rent> Rents { get; } = new List<Rent>();
 
 		public Vehicle() { }
 		public Vehicle(int id, VehicleType vehicleType, AbstractEngine vehicleEngine, string model, 

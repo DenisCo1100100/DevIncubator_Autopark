@@ -14,7 +14,8 @@ namespace DevIncubator_Autopark.Types
 
 		public VehicleType(int id, string typeName, double taxCoefficient = 1d)
 		{
-			TypeName = typeName;
+            Id = id;
+            TypeName = typeName;
 			TaxCoefficient = taxCoefficient;
 		}
 
