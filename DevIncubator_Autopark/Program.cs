@@ -1,6 +1,4 @@
-﻿using DevIncubator_Autopark.Engines;
-using DevIncubator_Autopark.Types;
-using DevIncubator_Autopark.VehicleEntity;
+﻿using DevIncubator_Autopark.VehicleEntity;
 using DevIncubator_Autopark.AllCollections;
 using System;
 using System.IO;
@@ -24,7 +22,7 @@ namespace DevIncubator_Autopark
                 Console.WriteLine($"{vehicles[i].Model} -> vehicle queued up");
             }
 
-            Console.WriteLine("\nTransport is washed...\n");
+			Console.WriteLine("\nTransport is washed...\n");
 
 			int count = queueVehicles.Count;
 			for (int i = 0; i < count; i++)

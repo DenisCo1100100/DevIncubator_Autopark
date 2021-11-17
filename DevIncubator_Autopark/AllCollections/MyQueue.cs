@@ -9,15 +9,16 @@ namespace DevIncubator_Autopark.AllCollections
         private const int DefaultCapacity = 10;
         private const int ResizeValue = 2;
 
-        public int Count { get => _endIndex - _startIndex; }
+        public int Count { get => _endIndex; }
 
-        private readonly T[] _queue;
-        private int _startIndex;
+        private T[] _queue;
         private int _endIndex;
 
         public MyQueue()
         {
             _queue = new T[DefaultCapacity];
+
+            _endIndex = 0;
         }
 
         public MyQueue(T[] queue)
@@ -29,7 +30,6 @@ namespace DevIncubator_Autopark.AllCollections
 
             _queue = queue;
 
-            _startIndex = 0;
             _endIndex = _queue.Length - 1;
         }
 
@@ -42,24 +42,26 @@ namespace DevIncubator_Autopark.AllCollections
 
             _queue = new T[size];
 
-            _startIndex = 0;
             _endIndex = 0;
         }
 
         public T Dequeue()
         {
-            if (_startIndex == _endIndex)
-                return default;
+            if (Count == 0)
+                throw new InvalidOperationException("Can't remove item, queue is empty ");
 
-            var requiredItem = _queue[_startIndex];
-            _startIndex++;
+            var requiredItem = _queue[0];
+            var newQueue = new T[Count];
+            
+            Array.Copy(_queue, 1, newQueue, 0, --_endIndex);
+            _queue = newQueue;
 
             return requiredItem;
         }
 
         public void Enqueue(T item)
         {
-            if (_queue.Length - 1 == _endIndex)
+            if (Count - 1 == _endIndex)
             {
                 Resize();
             }
@@ -72,6 +74,8 @@ namespace DevIncubator_Autopark.AllCollections
         {
             for (int i = 0; i < _queue.Length; i++)
                 _queue[i] = default;
+
+            _endIndex = 0;
         }
 
         public bool Contains(T item)
@@ -99,11 +103,9 @@ namespace DevIncubator_Autopark.AllCollections
 
         public IEnumerator<T> GetEnumerator()
         {
-            int endIndex = _endIndex;
-
-            while (_startIndex != endIndex)
+            for (int i = 0; i < _endIndex; i++)
             {
-                yield return _queue[endIndex++];
+                yield return _queue[i];
             }
         }
 
