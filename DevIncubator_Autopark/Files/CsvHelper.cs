@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace DevIncubator_Autopark.Files
 {
-    class CsvHelper
+    public class CsvHelper
     {
         public string Path { get; }
         public CsvHelper(string path)
