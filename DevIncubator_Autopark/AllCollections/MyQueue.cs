@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DevIncubator_Autopark.AllCollections
 {
-    class MyQueue<T> : IEnumerable<T>
+    public class MyQueue<T> : IEnumerable<T>
     {
         private const int DefaultCapacity = 10;
         private const int ResizeValue = 2;

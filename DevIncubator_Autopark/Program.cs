@@ -9,7 +9,7 @@ namespace DevIncubator_Autopark
     {
         private static readonly string DirectoryPath = @$"{Directory.GetCurrentDirectory()}\Files\";
 
-        static void Main()
+        public static void Main()
         {
             var vehicleCollections = new Collections($"{DirectoryPath}vehicles.csv", $"{DirectoryPath}types.csv", $"{DirectoryPath}rents.csv");
 

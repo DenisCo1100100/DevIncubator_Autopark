@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace DevIncubator_Autopark.Files
 {
-    class CsvHelper
+    public class CsvHelper
     {
         public string Path { get; }
         public CsvHelper(string path)
@@ -22,9 +22,9 @@ namespace DevIncubator_Autopark.Files
             }
         }
 
-        public static List<string> ParseCsvFile(string data)
-        {
-            var listParse = new List<string>();
+		public static List<string> ParseCsvFile(string data)
+		{
+			var listParse = new List<string>();
 
             data = ChangeDataFormat(data);
 
