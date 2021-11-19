@@ -22,9 +22,9 @@ namespace DevIncubator_Autopark.Files
             }
         }
 
-		public static List<string> ParseCsvFile(string data)
-		{
-			var listParse = new List<string>();
+        public static List<string> ParseCsvFile(string data)
+        {
+            var listParse = new List<string>();
 
             data = ChangeDataFormat(data);
 

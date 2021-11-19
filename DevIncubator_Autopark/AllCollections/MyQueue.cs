@@ -7,9 +7,8 @@ namespace DevIncubator_Autopark.AllCollections
     public class MyQueue<T> : IEnumerable<T>
     {
         private const int DefaultCapacity = 10;
-        private const int ResizeValue = 2;
 
-        public int Count { get => _endIndex; }
+        public int Count => GetCount();
 
         private T[] _queue;
         private int _endIndex;
@@ -21,28 +20,43 @@ namespace DevIncubator_Autopark.AllCollections
             _endIndex = 0;
         }
 
-        public MyQueue(T[] queue)
+        public MyQueue(IEnumerable<T> queue)
         {
-            if (queue != null)
+            if (queue is null)
             {
                 throw new ArgumentNullException(nameof(queue), "The transmitted data cannot be null");
             }
 
-            _queue = queue;
-
-            _endIndex = _queue.Length - 1;
+            _queue = new T[DefaultCapacity];
+            foreach (var item in queue)
+            {
+                Enqueue(item);
+            }
         }
 
         public MyQueue(int size)
         {
             if (size < 0)
             {
-                throw new ArgumentException("Queue size cannot be less than zero", nameof(size));
+                throw new ArgumentOutOfRangeException("Queue size cannot be less than zero", nameof(size));
             }
 
             _queue = new T[size];
-
             _endIndex = 0;
+        }
+
+        private int GetCount()
+        {
+            int count = 0;
+            foreach (var item in _queue)
+            {
+                if (item != null)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         public T Dequeue()
@@ -72,8 +86,7 @@ namespace DevIncubator_Autopark.AllCollections
 
         public void Clear()
         {
-            for (int i = 0; i < _queue.Length; i++)
-                _queue[i] = default;
+            Array.Clear(_queue, 0, Count);
 
             _endIndex = 0;
         }
@@ -91,14 +104,15 @@ namespace DevIncubator_Autopark.AllCollections
             return false;
         }
 
-        private T[] Resize()
-        {
-            T[] resizeQueue = new T[_queue.Length * ResizeValue];
+        private void Resize()
+        { 
+            int resizeValue = 2;
+            T[] resizeQueue = new T[_queue.Length * resizeValue];
 
             for (int i = 0; i < _queue.Length; i++)
                 resizeQueue[i] = _queue[i];
 
-            return resizeQueue;
+            _queue = resizeQueue;
         }
 
         public IEnumerator<T> GetEnumerator()
