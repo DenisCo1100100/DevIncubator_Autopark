@@ -8,7 +8,22 @@ namespace DevIncubator_Autopark.AllCollections
     {
         private const int DefaultCapacity = 10;
 
-        public int Count => GetCount();
+        public int Count 
+        {
+            get 
+            {
+                int count = 0;
+                foreach (var item in _queue)
+                {
+                    if (item != null)
+                    {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+        }
 
         private T[] _queue;
         private int _endIndex;
@@ -43,20 +58,6 @@ namespace DevIncubator_Autopark.AllCollections
 
             _queue = new T[size];
             _endIndex = 0;
-        }
-
-        private int GetCount()
-        {
-            int count = 0;
-            foreach (var item in _queue)
-            {
-                if (item != null)
-                {
-                    count++;
-                }
-            }
-
-            return count;
         }
 
         public T Dequeue()
@@ -117,10 +118,7 @@ namespace DevIncubator_Autopark.AllCollections
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < _endIndex; i++)
-            {
-                yield return _queue[i];
-            }
+            return (IEnumerator<T>)_queue.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
