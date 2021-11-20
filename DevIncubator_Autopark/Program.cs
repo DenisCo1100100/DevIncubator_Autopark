@@ -14,21 +14,25 @@ namespace DevIncubator_Autopark
             var vehicleCollections = new Collections($"{DirectoryPath}vehicles.csv", $"{DirectoryPath}types.csv", $"{DirectoryPath}rents.csv");
 
             var vehicles = vehicleCollections.Vehicles;
-            var queueVehicles = new MyQueue<Vehicle>();
+            var stackVehicles = new MyStack<Vehicle>();
 
             for (int i = 0; i < vehicles.Count; i++)
             {
-                queueVehicles.Enqueue(vehicles[i]);
-                Console.WriteLine($"{vehicles[i].Model} -> vehicle queued up");
+                stackVehicles.Push(vehicles[i]);
+                Console.WriteLine($"{vehicles[i].Model} -> drove into the garage");
             }
 
-            Console.WriteLine("\nTransport is washed...\n");
+            Console.WriteLine("\nThe garage is full...\n");
 
-            int count = queueVehicles.Count;
+            int count = stackVehicles.Count;
             for (int i = 0; i < count; i++)
             {
-                Console.WriteLine($"{queueVehicles.Dequeue().Model} -> washed");
+                Console.WriteLine($"{stackVehicles.Pop().Model} -> left the garage");
             }
+
+            Console.WriteLine("\nAuto shop orders:");
+
+            new AutoRepairShop("orders.csv").Print();
         }
     }
 }
