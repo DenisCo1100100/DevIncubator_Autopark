@@ -8,31 +8,15 @@ namespace DevIncubator_Autopark.AllCollections
     {
         private const int DefaultCapacity = 10;
 
-        public int Count 
-        {
-            get 
-            {
-                int count = 0;
-                foreach (var item in _queue)
-                {
-                    if (item != null)
-                    {
-                        count++;
-                    }
-                }
-
-                return count;
-            }
-        }
+        public int Count => _count;
 
         private T[] _queue;
-        private int _endIndex;
+        private int _endIndex = 0;
+        private int _count = 0;
 
         public MyQueue()
         {
             _queue = new T[DefaultCapacity];
-
-            _endIndex = 0;
         }
 
         public MyQueue(IEnumerable<T> queue)
@@ -57,7 +41,6 @@ namespace DevIncubator_Autopark.AllCollections
             }
 
             _queue = new T[size];
-            _endIndex = 0;
         }
 
         public T Dequeue()
@@ -70,6 +53,7 @@ namespace DevIncubator_Autopark.AllCollections
             
             Array.Copy(_queue, 1, newQueue, 0, --_endIndex);
             _queue = newQueue;
+            _count--;
 
             return requiredItem;
         }
@@ -83,6 +67,7 @@ namespace DevIncubator_Autopark.AllCollections
 
             _queue[_endIndex] = item;
             _endIndex++;
+            _count++;
         }
 
         public void Clear()
@@ -90,6 +75,7 @@ namespace DevIncubator_Autopark.AllCollections
             Array.Clear(_queue, 0, Count);
 
             _endIndex = 0;
+            _count = 0;
         }
 
         public bool Contains(T item)
