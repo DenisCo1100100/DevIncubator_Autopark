@@ -6,7 +6,7 @@ using DevIncubator_Autopark.VehicleEntity;
 using DevIncubator_Autopark.Engines.Base;
 using DevIncubator_Autopark.Engines;
 
-namespace DevIncubator_Autopark
+namespace DevIncubator_Autopark.AllCollections
 {
     public class Collections
     {
