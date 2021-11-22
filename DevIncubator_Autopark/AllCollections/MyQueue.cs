@@ -8,16 +8,14 @@ namespace DevIncubator_Autopark.AllCollections
     {
         private const int DefaultCapacity = 10;
 
-        public int Count => GetCount();
+        public int Count { get; private set; }
 
         private T[] _queue;
-        private int _endIndex;
+        private int _endIndex = 0;
 
         public MyQueue()
         {
             _queue = new T[DefaultCapacity];
-
-            _endIndex = 0;
         }
 
         public MyQueue(IEnumerable<T> queue)
@@ -42,21 +40,6 @@ namespace DevIncubator_Autopark.AllCollections
             }
 
             _queue = new T[size];
-            _endIndex = 0;
-        }
-
-        private int GetCount()
-        {
-            int count = 0;
-            foreach (var item in _queue)
-            {
-                if (item != null)
-                {
-                    count++;
-                }
-            }
-
-            return count;
         }
 
         public T Dequeue()
@@ -69,6 +52,7 @@ namespace DevIncubator_Autopark.AllCollections
             
             Array.Copy(_queue, 1, newQueue, 0, --_endIndex);
             _queue = newQueue;
+            Count--;
 
             return requiredItem;
         }
@@ -82,6 +66,7 @@ namespace DevIncubator_Autopark.AllCollections
 
             _queue[_endIndex] = item;
             _endIndex++;
+            Count++;
         }
 
         public void Clear()
@@ -89,6 +74,7 @@ namespace DevIncubator_Autopark.AllCollections
             Array.Clear(_queue, 0, Count);
 
             _endIndex = 0;
+            Count = 0;
         }
 
         public bool Contains(T item)
@@ -117,10 +103,7 @@ namespace DevIncubator_Autopark.AllCollections
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < _endIndex; i++)
-            {
-                yield return _queue[i];
-            }
+            return (IEnumerator<T>)_queue.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
