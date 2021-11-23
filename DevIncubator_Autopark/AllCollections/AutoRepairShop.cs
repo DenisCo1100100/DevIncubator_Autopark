@@ -17,13 +17,13 @@ namespace DevIncubator_Autopark.AllCollections
         {
             FileName = fileName;
 
-            GetListOrders();
+            CreateListOrders();
             CreateDictionary();
         }
 
-        private void GetListOrders()
+        private void CreateListOrders()
         {
-            var csvHelper = new CsvHelper(@$"{DirectoryPath}{FileName}");
+            var csvHelper = new CsvHelper(Path.Combine(DirectoryPath, FileName));
             _orders = new List<string>();
 
             foreach (var csvStrings in csvHelper.ReadCsvFile())
@@ -40,11 +40,11 @@ namespace DevIncubator_Autopark.AllCollections
 
         private void CreateDictionary()
         {
-            foreach (var deteil in _orders)
+            foreach (var detail in _orders)
             {
-                if (!Orders.TryAdd(deteil, 1))
+                if (!Orders.TryAdd(detail, 1))
                 {
-                    Orders[deteil]++;
+                    Orders[detail]++;
                 }
             }
         }

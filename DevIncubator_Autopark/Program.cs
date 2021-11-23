@@ -24,7 +24,7 @@ namespace DevIncubator_Autopark
 
             Console.WriteLine("\nThe garage is full...\n");
 
-            int count = stackVehicles.Count;
+            int count = stackVehicles.Count - 1;
             for (int i = 0; i < count; i++)
             {
                 Console.WriteLine($"{stackVehicles.Pop().Model} -> left the garage");

@@ -6,17 +6,25 @@ namespace DevIncubator_Autopark.AllCollections
 {
     public class MyStack<T> : IEnumerable<T>
     {
-        public int Count => GetCount();
+        public int Count => _headItemIndex + 1;
 
         private T[] _stack;
-        private int _headItemIndex;
+        private int _headItemIndex = 0;
 
         public MyStack()
         {
             int defaultCapacity = 10;
             _stack = new T[defaultCapacity];
+        }
 
-            _headItemIndex = -1;
+        public MyStack(int size)
+        {
+            if (size < 0)
+            {
+                throw new ArgumentOutOfRangeException("Stack size cannot be less than zero", nameof(size));
+            }
+
+            _stack = new T[size];
         }
 
         public MyStack(IEnumerable<T> stack)
@@ -43,7 +51,7 @@ namespace DevIncubator_Autopark.AllCollections
                 _stack = resizeStack;
             }
 
-            _stack[++_headItemIndex] = item;
+            _stack[_headItemIndex++] = item;
         }
 
         public T Pop()
@@ -53,37 +61,18 @@ namespace DevIncubator_Autopark.AllCollections
                 throw new InvalidOperationException("Can't pop item, stack is empty ");
             }
 
+            --_headItemIndex;
             T popItem = _stack[_headItemIndex];
             _stack[_headItemIndex] = default;
-            --_headItemIndex;
 
             return popItem;
-        }
-
-        private int GetCount()
-        {
-            int count = 0;
-            foreach (var item in _stack)
-            {
-                if (item == null)
-                {
-                    return count;
-                }
-
-                count++;
-            }
-
-            return 0;
         }
 
         public T Peek() => Count != 0 ? _stack[_headItemIndex] : throw new InvalidOperationException("Can't peek item, stack is empty ");
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < _stack.Length; i++)
-            {
-                yield return _stack[i];
-            }
+            return GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
